@@ -22,6 +22,7 @@ export default function Hero() {
       }}
     >
       <div
+        className="section-pad"
         style={{
           maxWidth: 1280,
           margin: "0 auto",
@@ -55,7 +56,7 @@ export default function Hero() {
           </div>
           <h1
             data-hero-item
-            className="font-bebas"
+            className="font-bebas hero-title"
             style={{
               margin: 0,
               fontSize: "clamp(52px, 6vw, 84px)",

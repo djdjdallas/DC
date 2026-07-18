@@ -7,7 +7,7 @@ export default function Highlights() {
       id="investors"
       style={{ background: "#0A0A0A", borderTop: "1px solid #1E1E1E" }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "64px 32px" }}>
+      <div className="section-pad" style={{ maxWidth: 1280, margin: "0 auto", padding: "64px 32px" }}>
         <SectionHeading>
           INVESTMENT <span style={{ color: "#E11414" }}>HIGHLIGHTS</span>
         </SectionHeading>

@@ -7,7 +7,7 @@ export default function Features() {
       id="platform"
       style={{ background: "#0A0A0A", borderTop: "1px solid #1E1E1E" }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "88px 32px" }}>
+      <div className="section-pad" style={{ maxWidth: 1280, margin: "0 auto", padding: "88px 32px" }}>
         <SectionHeading size={34} marginBottom={16}>
           POWERFUL <span style={{ color: "#E11414" }}>FEATURES.</span> ENDLESS
           POSSIBILITIES.

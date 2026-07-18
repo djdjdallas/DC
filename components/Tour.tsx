@@ -10,6 +10,7 @@ export default function Tour() {
   return (
     <section style={{ background: "#000", borderTop: "1px solid #1E1E1E" }}>
       <div
+        className="section-pad"
         style={{
           maxWidth: 1280,
           margin: "0 auto",
@@ -22,6 +23,7 @@ export default function Tour() {
       >
         <div
           data-tour-map
+          className="tour-map-box"
           style={{
             flex: "1 1 420px",
             position: "relative",

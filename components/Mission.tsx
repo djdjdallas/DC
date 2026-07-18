@@ -93,6 +93,7 @@ export default function Mission() {
   return (
     <section style={{ background: "#000", borderTop: "1px solid #1E1E1E" }}>
       <div
+        className="section-pad"
         style={{
           maxWidth: 1280,
           margin: "0 auto",

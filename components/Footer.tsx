@@ -1,4 +1,4 @@
-import { Logo } from "./Nav";
+import Logo from "./Logo";
 
 const colStyle: React.CSSProperties = {
   display: "flex",
@@ -18,7 +18,7 @@ const colTitle: React.CSSProperties = {
 export default function Footer() {
   return (
     <footer style={{ background: "#000", borderTop: "1px solid #1E1E1E" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 32px 32px" }}>
+      <div className="footer-pad" style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 32px 32px" }}>
         <div
           style={{
             display: "grid",

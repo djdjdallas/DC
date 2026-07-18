@@ -77,6 +77,7 @@ export default function ContactForm() {
   return (
     <section id="contact" style={{ background: "#0A0A0A" }}>
       <div
+        className="section-pad"
         style={{
           maxWidth: 1280,
           margin: "0 auto",
@@ -89,6 +90,7 @@ export default function ContactForm() {
       >
         <div
           data-reveal
+          className="contact-sticky"
           style={{
             flex: "1 1 340px",
             display: "flex",
@@ -167,6 +169,7 @@ export default function ContactForm() {
 
         <div
           data-reveal
+          className="form-card"
           style={{
             flex: "1 1 360px",
             maxWidth: 520,
@@ -252,6 +255,7 @@ export default function ContactForm() {
                 INVESTOR INFORMATION
               </div>
               <div
+                className="form-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
@@ -276,6 +280,7 @@ export default function ContactForm() {
                 <input type="tel" value={f.phone} onChange={set("phone")} style={inputStyle} />
               </label>
               <div
+                className="form-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",

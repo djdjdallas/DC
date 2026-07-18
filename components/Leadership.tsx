@@ -9,7 +9,7 @@ export default function Leadership() {
       id="leadership"
       style={{ background: "#0A0A0A", borderTop: "1px solid #1E1E1E" }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "88px 32px" }}>
+      <div className="section-pad" style={{ maxWidth: 1280, margin: "0 auto", padding: "88px 32px" }}>
         <SectionHeading size={34}>
           MEET THE <span style={{ color: "#E11414" }}>LEADERSHIP</span>
         </SectionHeading>

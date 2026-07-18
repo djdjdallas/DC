@@ -1,8 +1,9 @@
 export default function CtaBand() {
   return (
-    <section style={{ background: "#0A0A0A", padding: "0 32px" }}>
+    <section className="cta-outer" style={{ background: "#0A0A0A", padding: "0 32px" }}>
       <div
         data-reveal
+        className="cta-band"
         style={{
           maxWidth: 1280,
           margin: "0 auto",

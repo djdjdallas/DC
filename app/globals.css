@@ -86,6 +86,78 @@ a:focus-visible {
   }
 }
 
+/* ---- mobile overrides (inline styles need !important to lose) ---- */
+
+/* nav links can't fit next to the logo and CTA on small screens —
+   the hamburger + slide-down menu takes over */
+.nav-burger,
+.nav-mobile {
+  display: none !important;
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    display: none !important;
+  }
+  .nav-burger {
+    display: inline-flex !important;
+  }
+  .nav-mobile {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-inner {
+    padding: 0 20px !important;
+  }
+
+  .nav-cta {
+    padding: 10px 14px !important;
+    font-size: 11px !important;
+  }
+
+  .section-pad {
+    padding: 64px 20px !important;
+  }
+
+  .footer-pad {
+    padding: 40px 20px 24px !important;
+  }
+
+  .cta-outer {
+    padding: 0 20px !important;
+  }
+
+  .cta-band {
+    padding: 32px 24px !important;
+  }
+
+  .form-card {
+    padding: 28px 20px !important;
+  }
+
+  /* single column keeps inputs and selects usable */
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* stacked layout: pinning the intro over the form reads as a bug */
+  .contact-sticky {
+    position: static !important;
+  }
+
+  /* let the map size to its own aspect instead of a letterboxed 400px box */
+  .tour-map-box {
+    height: auto !important;
+    aspect-ratio: 8 / 5;
+  }
+
+  .hero-title {
+    font-size: clamp(44px, 13vw, 52px) !important;
+  }
+}
+
 /* tour map stops: pins turn red once visited, ring pulses once on arrival */
 .stop-pin {
   fill: #4a4a4a;
