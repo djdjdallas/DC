@@ -49,7 +49,21 @@ export default function Highlights() {
                   color: "#E11414",
                 }}
               >
-                {h.glyph}
+                {h.glyph === "↗" ? (
+                  // SVG instead of the ↗ character, which iOS renders as an emoji
+                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M4 12 L12 4 M6 4 H12 V10"
+                      fill="none"
+                      stroke="#E11414"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  h.glyph
+                )}
               </span>
               <div
                 className="font-bebas"
