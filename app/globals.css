@@ -99,6 +99,10 @@ a:focus-visible {
   .nav-links {
     display: none !important;
   }
+  /* the CTA moves into the slide-down menu on mobile */
+  .nav-cta {
+    display: none !important;
+  }
   .nav-burger {
     display: inline-flex !important;
   }
@@ -110,11 +114,6 @@ a:focus-visible {
 @media (max-width: 640px) {
   .nav-inner {
     padding: 0 20px !important;
-  }
-
-  .nav-cta {
-    padding: 10px 14px !important;
-    font-size: 11px !important;
   }
 
   .section-pad {
