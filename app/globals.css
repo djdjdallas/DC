@@ -1,0 +1,122 @@
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0a0a0a;
+  color: #f2f2f0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #f2f2f0;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e11414;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6e6e6e;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #e11414;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .stop-ring {
+    animation: none !important;
+  }
+}
+
+.font-bebas {
+  font-family: var(--font-bebas), "Bebas Neue", sans-serif;
+}
+
+/* hover variants (the source design's style-hover attributes) */
+.btn-red:hover {
+  background: #c10f0f !important;
+  color: #fff !important;
+}
+
+.btn-outline:hover {
+  border-color: #e11414 !important;
+}
+
+.card-hover:hover {
+  border-color: #6b0a0a !important;
+}
+
+.muted-link {
+  color: #9c9c9c;
+}
+
+.faint-link {
+  color: #6e6e6e;
+}
+
+.muted-link:hover,
+.faint-link:hover {
+  color: #e11414;
+}
+
+/* tour map stops: pins turn red once visited, ring pulses once on arrival */
+.stop-pin {
+  fill: #4a4a4a;
+  transition: fill 0.3s ease;
+}
+
+.stop-pin.visited {
+  fill: #e11414;
+}
+
+.stop-ring {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+}
+
+.stop-ring.pulse {
+  animation: stopPulse 0.7s ease-out forwards;
+}
+
+@keyframes stopPulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* city labels fade in as the bus arrives */
+.stop-label {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-transform: uppercase;
+}
+
+.stop-label.shown {
+  opacity: 1;
+}
