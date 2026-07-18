@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef } from "react";
 // Timing — tune the whole journey from here.
 const TRAVEL_DURATION = 1.2; // seconds of travel per leg
 const DWELL_DURATION = 0.8; // seconds parked at each stop
+const LOOP_PAUSE = 3; // seconds parked at HQ before the journey replays
 const MOBILE_QUERY = "(max-width: 640px)";
 
 const easeInOutCubic = (t) =>
@@ -72,8 +73,8 @@ export default function TourRoute({ stops }) {
       if (pin) pin.classList.add("visited");
       if (ring) {
         ring.classList.remove("pulse");
-        // restart the one-shot pulse animation
-        void ring.getBBox();
+        // force a reflow so the one-shot pulse animation restarts
+        void ring.getBoundingClientRect();
         ring.classList.add("pulse");
       }
       if (label) {
@@ -102,6 +103,17 @@ export default function TourRoute({ stops }) {
     route.style.strokeDashoffset = `${total}`;
     setBus(0);
 
+    // clear the trail, pins, and labels so the journey can replay
+    const resetJourney = () => {
+      route.style.strokeDashoffset = `${total}`;
+      pins.forEach((p, i) => {
+        if (i !== 0) p.classList.remove("visited");
+      });
+      rings.forEach((r) => r.classList.remove("pulse"));
+      labels.forEach((l) => l.classList.remove("shown"));
+      setBus(0);
+    };
+
     let legIndex = 0;
     let phase = "travel";
     let phaseStart = null;
@@ -117,18 +129,25 @@ export default function TourRoute({ stops }) {
         setBus(len);
         if (t >= 1) {
           arriveAt(legIndex + 1);
-          if (legIndex + 1 >= stops.length - 1) return; // journey complete
-          phase = "dwell";
+          phase = legIndex + 1 >= stops.length - 1 ? "complete" : "dwell";
           phaseStart = ts;
         }
-      } else if (elapsed >= DWELL_DURATION) {
-        if (isMobile) {
-          const departing = group.querySelector(
-            `[data-stop-label="${legIndex + 1}"]`
-          );
-          if (departing) departing.classList.remove("shown");
+      } else if (phase === "dwell") {
+        if (elapsed >= DWELL_DURATION) {
+          if (isMobile) {
+            const departing = group.querySelector(
+              `[data-stop-label="${legIndex + 1}"]`
+            );
+            if (departing) departing.classList.remove("shown");
+          }
+          legIndex += 1;
+          phase = "travel";
+          phaseStart = ts;
         }
-        legIndex += 1;
+      } else if (elapsed >= LOOP_PAUSE) {
+        // journey complete — rest at HQ, then run it again
+        resetJourney();
+        legIndex = 0;
         phase = "travel";
         phaseStart = ts;
       }
@@ -137,7 +156,7 @@ export default function TourRoute({ stops }) {
     };
 
     const start = () => {
-      if (startedRef.current) return; // play once, never re-trigger
+      if (startedRef.current) return; // one rAF loop only — replays are internal
       startedRef.current = true;
       rafRef.current = requestAnimationFrame(frame);
     };

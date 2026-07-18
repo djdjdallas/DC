@@ -26,11 +26,13 @@ export const team: {
   role: string;
   photo: string | null;
 }[] = [
-  { initials: "JP", name: "JASON PORTER", role: "Founder & CEO", photo: null },
-  { initials: "CP", name: "CAMERON PORTER", role: "Co-Founder", photo: null },
-  { initials: "JW", name: "JERRY WILLIAMS", role: "Chief Investment Officer", photo: null },
-  { initials: "AW", name: "AJ WILLIAMS", role: "Head of Technology", photo: null },
-  { initials: "KM", name: "KELLY MILLER", role: "Head of National Relations", photo: null },
+  { initials: "GP", name: "GERALD PITTS", role: "Founder & CEO", photo: "/images/team/gerald-pitts.jpg" },
+  { initials: "SR", name: "SOLOMAN ROBERTS", role: "COO", photo: "/images/team/soloman-roberts.jpg" },
+  { initials: "CB", name: "CAMERON BUTTON", role: "Chief Investment Officer", photo: "/images/team/cameron-button.jpg" },
+  { initials: "JD", name: "JERRY DABABNEH", role: "CSO", photo: "/images/team/jerry-dababneh.jpg" },
+  { initials: "DH", name: "DEVON HARRIS", role: "Chief Growth Officer", photo: "/images/team/devon-harris.jpg" },
+  { initials: "KJ", name: "KELLY JACKSON", role: "VP of Strategic Relations", photo: "/images/team/kelly-jackson.jpg" },
+  { initials: "AB", name: "ASHLEY BENNETT", role: "Director of Administration", photo: "/images/team/ashley-bennett.jpg" },
 ];
 
 export const appBarbers = [
@@ -48,11 +50,8 @@ export const accessItems = [
   "Data Room Access",
 ];
 
-/**
- * Hero image: drop a file at /public/images/hero.jpg and it appears
- * automatically. Set to null to show the placeholder slot.
- */
-export const heroImage: string | null = null;
+/** Hero image beside the hero copy. Set to null to show the placeholder slot. */
+export const heroImage: string | null = "/images/hero.jpg";
 
 /** Tour video URL — set it and the "Watch the video" button opens it. */
 export const videoUrl: string = "";

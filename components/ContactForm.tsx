@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { accessItems } from "@/lib/data";
+import { submitInvestorRequest } from "@/app/actions";
 
 const emptyForm = {
   firstName: "",
@@ -37,6 +38,7 @@ export default function ContactForm() {
   const [f, setF] = useState(emptyForm);
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const set =
     (k: keyof typeof emptyForm) =>
@@ -56,9 +58,15 @@ export default function ContactForm() {
       return setFormError("Please enter a valid email address.");
     if (!f.investorType || !f.range)
       return setFormError("Please select an investor type and investment range.");
-    // TODO: wire to a Server Action / API route (e.g. Supabase) for production.
-    setSubmitted(true);
-    setFormError("");
+    startTransition(async () => {
+      const result = await submitInvestorRequest(f);
+      if (result.ok) {
+        setSubmitted(true);
+        setFormError("");
+      } else {
+        setFormError(result.error);
+      }
+    });
   };
 
   const resetForm = () => {
@@ -329,6 +337,7 @@ export default function ContactForm() {
               )}
               <button
                 onClick={submitForm}
+                disabled={isPending}
                 className="btn-red"
                 style={{
                   background: "#E11414",
@@ -340,11 +349,12 @@ export default function ContactForm() {
                   letterSpacing: "0.12em",
                   padding: 16,
                   borderRadius: 6,
-                  cursor: "pointer",
+                  cursor: isPending ? "wait" : "pointer",
                   marginTop: 4,
+                  opacity: isPending ? 0.7 : 1,
                 }}
               >
-                🔒 REQUEST ACCESS
+                {isPending ? "SUBMITTING…" : "🔒 REQUEST ACCESS"}
               </button>
               <p
                 style={{

@@ -7,6 +7,88 @@ const stats = [
   { value: "10X", label: "GROWTH POTENTIAL", color: "#E11414" },
 ];
 
+function PhoneFrame({
+  width,
+  height,
+  style,
+  screenStyle,
+  className,
+  children,
+}: {
+  width: number;
+  height: number;
+  style?: React.CSSProperties;
+  screenStyle?: React.CSSProperties;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={className}
+      style={{
+        width,
+        height,
+        background: "#0E0E0E",
+        border: "1px solid #2A2A2A",
+        borderRadius: width * 0.14,
+        padding: "12px 10px",
+        boxShadow: "0 40px 80px rgba(0,0,0,0.6), 0 0 0 5px #050505",
+        position: "relative",
+        flexShrink: 0,
+        ...style,
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 12,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: width * 0.33,
+          height: 16,
+          background: "#050505",
+          borderRadius: 8,
+          zIndex: 1,
+        }}
+      />
+      <div
+        style={{
+          height: "100%",
+          borderRadius: width * 0.09,
+          background: "#0A0A0A",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          padding: "30px 12px 12px",
+          gap: 10,
+          ...screenStyle,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function BookNowButton({ fontSize = 11 }: { fontSize?: number }) {
+  return (
+    <div
+      style={{
+        marginTop: "auto",
+        background: "#E11414",
+        borderRadius: 6,
+        textAlign: "center",
+        padding: 10,
+        fontSize,
+        fontWeight: 700,
+        letterSpacing: "0.1em",
+      }}
+    >
+      BOOK NOW
+    </div>
+  );
+}
+
 export default function Mission() {
   return (
     <section style={{ background: "#000", borderTop: "1px solid #1E1E1E" }}>
@@ -19,6 +101,7 @@ export default function Mission() {
           flexWrap: "wrap",
           gap: 64,
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <div
@@ -93,122 +176,214 @@ export default function Mission() {
           </div>
         </div>
 
-        <div style={{ flex: "0 1 340px", display: "flex", justifyContent: "center" }}>
-          <div
-            data-phone
+        {/* three-phone lineup: Find a Barber / Book Anywhere (front) / After Dark */}
+        <div
+          data-phone
+          style={{
+            flex: "0 1 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* left: FIND A BARBER */}
+          <PhoneFrame
+            width={186}
+            height={392}
+            className="phone-side"
             style={{
-              width: 260,
-              height: 530,
-              background: "#0E0E0E",
-              border: "1px solid #2A2A2A",
-              borderRadius: 36,
-              padding: "14px 12px",
-              boxShadow: "0 40px 80px rgba(0,0,0,0.6), 0 0 0 6px #050505",
-              position: "relative",
+              transform: "perspective(1000px) rotateY(16deg) translateY(18px)",
+              marginRight: -26,
+              zIndex: 1,
             }}
           >
+            <div className="font-bebas" style={{ fontSize: 18, letterSpacing: 1, lineHeight: 1 }}>
+              FIND A<br />BARBER
+            </div>
             <div
               style={{
-                position: "absolute",
-                top: 14,
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: 90,
-                height: 20,
-                background: "#050505",
-                borderRadius: 10,
-              }}
-            />
-            <div
-              style={{
-                height: "100%",
-                borderRadius: 24,
-                background: "#0A0A0A",
-                overflow: "hidden",
+                height: 26,
+                border: "1px solid #262626",
+                borderRadius: 6,
+                background: "#111",
                 display: "flex",
-                flexDirection: "column",
-                padding: "34px 14px 14px",
-                gap: 12,
+                alignItems: "center",
+                padding: "0 8px",
+                color: "#6E6E6E",
+                fontSize: 9,
               }}
             >
-              <div className="font-bebas" style={{ fontSize: 24, letterSpacing: 1 }}>
-                FIND A BARBER
-              </div>
-              <div
-                style={{
-                  height: 32,
-                  border: "1px solid #262626",
-                  borderRadius: 6,
-                  background: "#111",
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "0 10px",
-                  color: "#6E6E6E",
-                  fontSize: 11,
-                }}
-              >
-                Search by name or location
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {appBarbers.map((b) => (
-                  <div
-                    key={b.name}
+              Search barbers
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {appBarbers.map((b) => (
+                <div
+                  key={b.name}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    background: "#111",
+                    border: "1px solid #1E1E1E",
+                    borderRadius: 7,
+                    padding: "6px 8px",
+                  }}
+                >
+                  <span
+                    className="font-bebas"
                     style={{
-                      display: "flex",
+                      width: 24,
+                      height: 24,
+                      borderRadius: "50%",
+                      background: "linear-gradient(135deg, #2A0505, #4A0A0A)",
+                      display: "inline-flex",
                       alignItems: "center",
-                      gap: 10,
-                      background: "#111",
-                      border: "1px solid #1E1E1E",
-                      borderRadius: 8,
-                      padding: "8px 10px",
+                      justifyContent: "center",
+                      fontSize: 10,
+                      color: "#F2F2F0",
+                      flexShrink: 0,
                     }}
                   >
-                    <span
-                      className="font-bebas"
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: "50%",
-                        background: "linear-gradient(135deg, #2A0505, #4A0A0A)",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 13,
-                        color: "#F2F2F0",
-                      }}
-                    >
-                      {b.initials}
+                    {b.initials}
+                  </span>
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <span style={{ display: "block", fontSize: 9, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {b.name}
                     </span>
-                    <span style={{ flex: 1 }}>
-                      <span style={{ display: "block", fontSize: 11, fontWeight: 600 }}>
-                        {b.name}
-                      </span>
-                      <span style={{ display: "block", fontSize: 10, color: "#9C9C9C" }}>
-                        {b.meta}
-                      </span>
+                    <span style={{ display: "block", fontSize: 8, color: "#9C9C9C" }}>
+                      {b.meta}
                     </span>
-                    <span style={{ color: "#E11414", fontSize: 10, fontWeight: 700 }}>
-                      ★ {b.rating}
-                    </span>
-                  </div>
-                ))}
-              </div>
+                  </span>
+                  <span style={{ color: "#E11414", fontSize: 8, fontWeight: 700 }}>
+                    ★ {b.rating}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </PhoneFrame>
+
+          {/* center: BOOK ANYWHERE (front) */}
+          <PhoneFrame width={228} height={470} style={{ zIndex: 2 }}>
+            <div className="font-bebas" style={{ fontSize: 24, letterSpacing: 1, lineHeight: 0.95 }}>
+              BOOK<br />ANYWHERE
+            </div>
+            <div
+              style={{
+                flex: 1,
+                borderRadius: 8,
+                border: "1px solid #1E1E1E",
+                position: "relative",
+                overflow: "hidden",
+                background:
+                  // stylized dark street map
+                  "repeating-linear-gradient(0deg, transparent 0px, transparent 34px, #1C1C1C 34px, #1C1C1C 36px)," +
+                  "repeating-linear-gradient(90deg, transparent 0px, transparent 44px, #1C1C1C 44px, #1C1C1C 46px)," +
+                  "linear-gradient(120deg, #141414 0%, #101010 60%, #161010 100%)",
+              }}
+            >
               <div
                 style={{
-                  marginTop: "auto",
-                  background: "#E11414",
-                  borderRadius: 6,
-                  textAlign: "center",
-                  padding: 11,
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
+                  position: "absolute",
+                  top: 0,
+                  left: "30%",
+                  width: 3,
+                  height: "100%",
+                  background: "#222",
+                  transform: "rotate(18deg)",
+                }}
+              />
+              {/* map pin */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "42%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
                 }}
               >
-                BOOK NOW
+                <span
+                  style={{
+                    display: "block",
+                    width: 22,
+                    height: 22,
+                    background: "#E11414",
+                    borderRadius: "50% 50% 50% 0",
+                    transform: "rotate(-45deg)",
+                    boxShadow: "0 0 14px rgba(225,20,20,0.55)",
+                  }}
+                >
+                  <span
+                    style={{
+                      position: "absolute",
+                      inset: 6,
+                      borderRadius: "50%",
+                      background: "#0A0A0A",
+                    }}
+                  />
+                </span>
               </div>
             </div>
-          </div>
+            <BookNowButton />
+          </PhoneFrame>
+
+          {/* right: AFTER DARK */}
+          <PhoneFrame
+            width={186}
+            height={392}
+            className="phone-side"
+            style={{
+              transform: "perspective(1000px) rotateY(-16deg) translateY(18px)",
+              marginLeft: -26,
+              zIndex: 1,
+            }}
+          >
+            <div className="font-bebas" style={{ fontSize: 18, letterSpacing: 1, lineHeight: 1 }}>
+              AFTER <span style={{ color: "#E11414" }}>DARK</span>
+            </div>
+            <div
+              style={{
+                fontSize: 8,
+                fontWeight: 600,
+                letterSpacing: "0.14em",
+                color: "#9C9C9C",
+                lineHeight: 1.5,
+              }}
+            >
+              PREMIUM AFTER HOURS
+              <br />
+              APPOINTMENTS
+            </div>
+            <div
+              style={{
+                flex: 1,
+                borderRadius: 8,
+                border: "1px solid #1E1E1E",
+                background:
+                  "radial-gradient(circle at 50% 30%, #241010 0%, #120808 55%, #0A0606 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span
+                className="font-bebas"
+                style={{
+                  width: 54,
+                  height: 54,
+                  borderRadius: "50%",
+                  border: "1.5px solid #E11414",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 26,
+                  color: "#E11414",
+                }}
+              >
+                ☾
+              </span>
+            </div>
+            <BookNowButton fontSize={10} />
+          </PhoneFrame>
         </div>
       </div>
     </section>

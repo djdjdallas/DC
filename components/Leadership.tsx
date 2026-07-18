@@ -43,6 +43,7 @@ export default function Leadership() {
                   style={{
                     height: 200,
                     width: "100%",
+                    objectPosition: "center top",
                     borderBottom: "2px solid #E11414",
                   }}
                 />

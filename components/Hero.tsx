@@ -16,48 +16,29 @@ export default function Hero() {
     <section
       id="top"
       style={{
-        position: "relative",
-        minHeight: 640,
-        display: "flex",
-        alignItems: "center",
+        background:
+          "radial-gradient(ellipse at 75% 40%, #150808 0%, #000 55%), #000",
         overflow: "hidden",
-        background: "#000",
       }}
     >
-      <div style={{ position: "absolute", inset: 0 }}>
-        <ImageSlot
-          src={heroImage}
-          alt="DirectCuts tour bus at dusk"
-          label="Hero photo — tour bus at dusk"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(90deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.75) 42%, rgba(0,0,0,0.25) 100%)",
-            pointerEvents: "none",
-          }}
-        />
-      </div>
       <div
         style={{
-          position: "relative",
           maxWidth: 1280,
           margin: "0 auto",
-          padding: "96px 32px",
-          width: "100%",
-          pointerEvents: "none",
+          padding: "88px 32px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 56,
+          alignItems: "center",
         }}
       >
         <div
           style={{
+            flex: "1 1 440px",
             maxWidth: 620,
             display: "flex",
             flexDirection: "column",
             gap: 22,
-            pointerEvents: "auto",
           }}
         >
           <div
@@ -77,7 +58,7 @@ export default function Hero() {
             className="font-bebas"
             style={{
               margin: 0,
-              fontSize: "clamp(56px, 7vw, 92px)",
+              fontSize: "clamp(52px, 6vw, 84px)",
               lineHeight: 0.95,
               letterSpacing: 0.5,
               textWrap: "balance",
@@ -145,11 +126,13 @@ export default function Hero() {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 9,
-                  color: "#E11414",
+                  flexShrink: 0,
                 }}
               >
-                ▶
+                {/* nudged right so the triangle sits optically centered */}
+                <svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true" style={{ marginLeft: 1.5 }}>
+                  <polygon points="0,0 8,5 0,10" fill="#E11414" />
+                </svg>
               </span>
               WATCH THE VIDEO
             </button>
@@ -157,6 +140,60 @@ export default function Hero() {
           {videoNote && (
             <div style={{ color: "#9C9C9C", fontSize: 12 }}>{videoNote}</div>
           )}
+        </div>
+
+        <div
+          data-hero-item
+          style={{
+            flex: "1 1 420px",
+            minWidth: 0,
+            position: "relative",
+          }}
+        >
+          <ImageSlot
+            src={heroImage}
+            alt="DirectCuts branded tour bus at dusk surrounded by a crowd, city skyline behind"
+            label="Hero photo — tour bus at dusk"
+            style={{
+              width: "100%",
+              height: "auto",
+              aspectRatio: "4 / 3",
+              borderRadius: 12,
+              border: "1px solid #222",
+              boxShadow: "0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(225,20,20,0.08)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              left: 20,
+              bottom: 20,
+              background: "rgba(8,8,8,0.85)",
+              backdropFilter: "blur(6px)",
+              border: "1px solid #2A2A2A",
+              borderRadius: 8,
+              padding: "10px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: "#E11414",
+                flexShrink: 0,
+              }}
+            />
+            <span
+              className="font-bebas"
+              style={{ fontSize: 16, letterSpacing: 1.5, whiteSpace: "nowrap" }}
+            >
+              THE TOUR IS COMING
+            </span>
+          </div>
         </div>
       </div>
     </section>
