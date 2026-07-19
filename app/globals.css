@@ -157,6 +157,40 @@ a:focus-visible {
   }
 }
 
+/* features bento grid: rows fill edge to edge, some cards span wider */
+.features-grid {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.feat-span-3 {
+  grid-column: span 3;
+}
+
+.feat-span-5 {
+  grid-column: span 5;
+}
+
+.feat-span-7 {
+  grid-column: span 7;
+}
+
+@media (max-width: 980px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feat-span-3,
+  .feat-span-5,
+  .feat-span-7 {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* AI scan screen: sweeping red scan line */
 .scan-line {
   position: absolute;

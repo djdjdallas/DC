@@ -1,6 +1,10 @@
 import SectionHeading from "./SectionHeading";
 import { features } from "@/lib/data";
 
+// bento spans on a 12-column grid: 4 cards across the top row,
+// 2 wider cards filling the bottom row — both rows run edge to edge
+const FEATURE_SPANS = [3, 3, 3, 3, 7, 5];
+
 export default function Features() {
   return (
     <section
@@ -28,16 +32,16 @@ export default function Features() {
         </p>
         <div
           data-stagger
+          className="features-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: 18,
           }}
         >
-          {features.map((f) => (
+          {features.map((f, i) => (
             <div
               key={f.title}
-              className="card-hover"
+              className={`card-hover feat-span-${FEATURE_SPANS[i]}`}
               style={{
                 background: "#111",
                 border: "1px solid #222",
