@@ -58,9 +58,12 @@ export const heroImage: string | null = "/images/hero.jpg";
  * version with the new cut. Null shows labeled placeholder slots.
  */
 export const aiPreview: { before: string | null; after: string | null } = {
-  before: null,
-  after: null,
+  before: "/images/ai-before.jpg",
+  after: "/images/ai-after.jpg",
 };
+
+/** Photo shown on the AI scan phone screen. */
+export const aiScanImage: string = "/images/ai-scan.jpg";
 
 /** Tour video URL — set it and the "Watch the video" button opens it. */
 export const videoUrl: string = "";

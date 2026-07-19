@@ -1,6 +1,6 @@
 import { PhoneFrame, BookNowButton } from "./PhoneFrame";
 import BeforeAfterSlider from "./BeforeAfterSlider";
-import { aiPreview } from "@/lib/data";
+import { aiPreview, aiScanImage } from "@/lib/data";
 
 const steps = [
   {
@@ -49,50 +49,6 @@ const steps = [
     ),
   },
 ];
-
-// stylized wireframe head for the scan screen (placeholder until the
-// AI-generated version from a real photo arrives)
-function WireframeHead() {
-  return (
-    <svg
-      viewBox="0 0 120 140"
-      aria-hidden="true"
-      style={{ width: "72%", height: "auto", display: "block", margin: "0 auto" }}
-    >
-      <defs>
-        <clipPath id="headClip">
-          <path d="M60 6 C 88 6 104 28 104 54 C 104 70 98 80 92 88 C 88 94 86 102 86 112 L 86 134 L 38 134 L 38 116 C 38 106 34 98 28 90 C 20 80 16 70 16 54 C 16 28 32 6 60 6 Z" />
-        </clipPath>
-      </defs>
-      <path
-        d="M60 6 C 88 6 104 28 104 54 C 104 70 98 80 92 88 C 88 94 86 102 86 112 L 86 134 L 38 134 L 38 116 C 38 106 34 98 28 90 C 20 80 16 70 16 54 C 16 28 32 6 60 6 Z"
-        fill="#101010"
-        stroke="#3A3A3A"
-        strokeWidth="1"
-      />
-      <g clipPath="url(#headClip)" stroke="#2E2E2E" strokeWidth="0.7" fill="none">
-        {/* latitude mesh */}
-        {[20, 34, 48, 62, 76, 90, 104, 118].map((y) => (
-          <path key={`lat-${y}`} d={`M10 ${y} Q 60 ${y + 10} 110 ${y}`} />
-        ))}
-        {/* longitude mesh */}
-        {[28, 44, 60, 76, 92].map((x) => (
-          <path key={`lon-${x}`} d={`M${x} 0 Q ${x > 60 ? x + 8 : x - 8} 70 ${x} 140`} />
-        ))}
-      </g>
-      {/* red scan highlights */}
-      <g clipPath="url(#headClip)">
-        <path
-          d="M10 48 Q 60 58 110 48"
-          fill="none"
-          stroke="#E11414"
-          strokeWidth="1"
-          opacity="0.8"
-        />
-      </g>
-    </svg>
-  );
-}
 
 export default function AiTechnology() {
   return (
@@ -268,15 +224,24 @@ export default function AiTechnology() {
                 flex: 1,
                 borderRadius: 8,
                 border: "1px solid #1E1E1E",
-                background:
-                  "radial-gradient(circle at 50% 35%, #131313 0%, #0C0C0C 70%)",
+                background: "#0C0C0C",
                 position: "relative",
                 overflow: "hidden",
-                display: "flex",
-                alignItems: "center",
               }}
             >
-              <WireframeHead />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={aiScanImage}
+                alt="Head being scanned with a 3D wireframe mesh and laser line"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center 22%",
+                }}
+              />
               <div className="scan-line" />
             </div>
             <div style={{ display: "flex", gap: 6 }}>
