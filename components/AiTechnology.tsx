@@ -209,7 +209,7 @@ export default function AiTechnology() {
         {/* scan phone */}
         <div
           data-reveal
-          style={{ flex: "0 1 auto", display: "flex", justifyContent: "center" }}
+          style={{ flex: "1 1 auto", display: "flex", justifyContent: "center" }}
         >
           <PhoneFrame width={228} height={470}>
             <div
