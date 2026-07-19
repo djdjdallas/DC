@@ -2,15 +2,11 @@
 
 import { useState } from "react";
 import ImageSlot from "./ImageSlot";
+import VideoModal from "./VideoModal";
 import { heroImage, videoUrl } from "@/lib/data";
 
 export default function Hero() {
-  const [videoNote, setVideoNote] = useState("");
-
-  const onWatchVideo = () => {
-    if (videoUrl) window.open(videoUrl, "_blank");
-    else setVideoNote("[ Video coming soon — tour video URL not set yet ]");
-  };
+  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
     <section
@@ -100,7 +96,7 @@ export default function Hero() {
               INVEST IN DIRECTCUTS
             </a>
             <button
-              onClick={onWatchVideo}
+              onClick={() => setVideoOpen(true)}
               className="btn-outline"
               style={{
                 background: "rgba(255,255,255,0.06)",
@@ -138,8 +134,8 @@ export default function Hero() {
               WATCH THE VIDEO
             </button>
           </div>
-          {videoNote && (
-            <div style={{ color: "#9C9C9C", fontSize: 12 }}>{videoNote}</div>
+          {videoOpen && (
+            <VideoModal src={videoUrl} onClose={() => setVideoOpen(false)} />
           )}
         </div>
 

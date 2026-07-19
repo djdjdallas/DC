@@ -72,5 +72,5 @@ export const aiCuts = [
   { label: "Taper", src: "/images/cut-taper.jpg" },
 ];
 
-/** Tour video URL — set it and the "Watch the video" button opens it. */
-export const videoUrl: string = "";
+/** Tour video, opened in a modal by the "Watch the video" button. */
+export const videoUrl: string = "/videos/tour.mp4";
