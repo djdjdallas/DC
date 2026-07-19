@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useRef } from "react";
 
 // Timing — tune the whole journey from here.
-const TRAVEL_DURATION = 1.2; // seconds of travel per leg
-const DWELL_DURATION = 0.8; // seconds parked at each stop
+// 49 legs at (travel + dwell) ≈ 50s per lap.
+const TRAVEL_DURATION = 0.65; // seconds of travel per leg
+const DWELL_DURATION = 0.35; // seconds parked at each stop
 const LOOP_PAUSE = 3; // seconds parked at HQ before the journey replays
 const MOBILE_QUERY = "(max-width: 640px)";
 
@@ -89,7 +90,11 @@ export default function TourRoute({ stops }) {
       route.style.strokeDasharray = "none";
       route.style.strokeDashoffset = "0";
       pins.forEach((p) => p.classList.add("visited"));
-      if (!isMobile) labels.forEach((l) => l.classList.add("shown"));
+      // only major-stop labels persist; transient ones would clutter the map
+      if (!isMobile)
+        labels.forEach((l) => {
+          if (!l.dataset.transient) l.classList.add("shown");
+        });
       setBus(total);
     };
 
@@ -134,12 +139,12 @@ export default function TourRoute({ stops }) {
         }
       } else if (phase === "dwell") {
         if (elapsed >= DWELL_DURATION) {
-          if (isMobile) {
-            const departing = group.querySelector(
-              `[data-stop-label="${legIndex + 1}"]`
-            );
-            if (departing) departing.classList.remove("shown");
-          }
+          const departing = group.querySelector(
+            `[data-stop-label="${legIndex + 1}"]`
+          );
+          // minor-stop labels fade once the bus moves on; majors persist
+          if (departing && (isMobile || departing.dataset.transient))
+            departing.classList.remove("shown");
           legIndex += 1;
           phase = "travel";
           phaseStart = ts;
@@ -214,7 +219,7 @@ export default function TourRoute({ stops }) {
             className="stop-ring"
             cx={s.x}
             cy={s.y}
-            r={5}
+            r={s.major ? 5 : 4}
             fill="none"
             stroke="#E11414"
             strokeWidth={1.2}
@@ -224,19 +229,20 @@ export default function TourRoute({ stops }) {
             className={`stop-pin${i === 0 ? " visited" : ""}`}
             cx={s.x}
             cy={s.y}
-            r={3}
+            r={s.major ? 3 : 2.2}
           >
             <title>{s.name}</title>
           </circle>
           {i > 0 && (
             <text
               data-stop-label={i}
+              data-transient={s.major ? undefined : "1"}
               className="stop-label font-bebas"
               x={s.x + (s.labelDx ?? 0)}
               y={s.y + (s.labelDy ?? -10)}
               textAnchor={s.anchor ?? "middle"}
-              fill="#C9C9C4"
-              fontSize={11}
+              fill={s.major ? "#C9C9C4" : "#9C9C9C"}
+              fontSize={s.major ? 11 : 10}
               letterSpacing="0.12em"
             >
               {s.name.toUpperCase()}
