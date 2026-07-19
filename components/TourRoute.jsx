@@ -7,6 +7,9 @@ import { useEffect, useMemo, useRef } from "react";
 const TRAVEL_DURATION = 0.65; // seconds of travel per leg
 const DWELL_DURATION = 0.35; // seconds parked at each stop
 const LOOP_PAUSE = 3; // seconds parked at HQ before the journey replays
+// a minor stop's label stays visible while the bus covers this many
+// onward legs (~1s each), then fades — instead of vanishing on departure
+const LABEL_LINGER_STOPS = 3;
 const MOBILE_QUERY = "(max-width: 640px)";
 
 const easeInOutCubic = (t) =>
@@ -78,12 +81,7 @@ export default function TourRoute({ stops }) {
         void ring.getBoundingClientRect();
         ring.classList.add("pulse");
       }
-      if (label) {
-        if (isMobile) {
-          labels.forEach((l) => l.classList.remove("shown"));
-        }
-        label.classList.add("shown");
-      }
+      if (label) label.classList.add("shown");
     };
 
     const showEndState = () => {
@@ -139,12 +137,13 @@ export default function TourRoute({ stops }) {
         }
       } else if (phase === "dwell") {
         if (elapsed >= DWELL_DURATION) {
-          const departing = group.querySelector(
-            `[data-stop-label="${legIndex + 1}"]`
+          // fade the label the bus passed LABEL_LINGER_STOPS legs ago;
+          // major-stop labels persist on desktop
+          const lingered = group.querySelector(
+            `[data-stop-label="${legIndex + 1 - LABEL_LINGER_STOPS}"]`
           );
-          // minor-stop labels fade once the bus moves on; majors persist
-          if (departing && (isMobile || departing.dataset.transient))
-            departing.classList.remove("shown");
+          if (lingered && (isMobile || lingered.dataset.transient))
+            lingered.classList.remove("shown");
           legIndex += 1;
           phase = "travel";
           phaseStart = ts;
