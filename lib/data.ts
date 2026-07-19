@@ -27,7 +27,7 @@ export const team: {
   photo: string | null;
 }[] = [
   { initials: "GP", name: "GERALD PITTS", role: "Founder & CEO", photo: "/images/team/gerald-pitts.jpg" },
-  { initials: "SR", name: "SOLOMAN ROBERTS", role: "COO", photo: "/images/team/soloman-roberts.jpg" },
+  { initials: "SR", name: "SOLOMON ROBERTS", role: "COO", photo: "/images/team/solomon-roberts.jpg" },
   { initials: "CB", name: "CAMERON BUTTON", role: "Chief Investment Officer", photo: "/images/team/cameron-button.jpg" },
   { initials: "JD", name: "JERRY DABABNEH", role: "CSO", photo: "/images/team/jerry-dababneh.jpg" },
   { initials: "DH", name: "DEVON HARRIS", role: "Chief Growth Officer", photo: "/images/team/devon-harris.jpg" },
