@@ -1,6 +1,6 @@
 import { PhoneFrame, BookNowButton } from "./PhoneFrame";
 import BeforeAfterSlider from "./BeforeAfterSlider";
-import { aiPreview, aiScanImage } from "@/lib/data";
+import { aiPreview, aiScanImage, aiCuts } from "@/lib/data";
 
 const steps = [
   {
@@ -245,27 +245,49 @@ export default function AiTechnology() {
               <div className="scan-line" />
             </div>
             <div style={{ display: "flex", gap: 6 }}>
-              {["Fade", "Waves", "Taper"].map((cut) => (
+              {aiCuts.map((cut) => (
                 <div
-                  key={cut}
+                  key={cut.label}
                   style={{
                     flex: 1,
                     aspectRatio: "1",
                     borderRadius: 6,
                     border: "1px solid #262626",
-                    background: "linear-gradient(160deg, #1A1A1A, #101010)",
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "center",
-                    paddingBottom: 4,
-                    fontSize: 8,
-                    fontWeight: 600,
-                    letterSpacing: "0.08em",
-                    color: "#9C9C9C",
-                    textTransform: "uppercase",
+                    position: "relative",
+                    overflow: "hidden",
                   }}
                 >
-                  {cut}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={cut.src}
+                    alt={`${cut.label} haircut example`}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      padding: "10px 0 4px",
+                      background:
+                        "linear-gradient(180deg, transparent, rgba(0,0,0,0.85))",
+                      textAlign: "center",
+                      fontSize: 8,
+                      fontWeight: 600,
+                      letterSpacing: "0.08em",
+                      color: "#F2F2F0",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {cut.label}
+                  </span>
                 </div>
               ))}
             </div>

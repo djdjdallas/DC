@@ -65,5 +65,12 @@ export const aiPreview: { before: string | null; after: string | null } = {
 /** Photo shown on the AI scan phone screen. */
 export const aiScanImage: string = "/images/ai-scan.jpg";
 
+/** Haircut style thumbnails under the scan screen. */
+export const aiCuts = [
+  { label: "Fade", src: "/images/cut-fade.jpg" },
+  { label: "Waves", src: "/images/cut-waves.jpg" },
+  { label: "Taper", src: "/images/cut-taper.jpg" },
+];
+
 /** Tour video URL — set it and the "Watch the video" button opens it. */
 export const videoUrl: string = "";
