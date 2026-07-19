@@ -53,5 +53,14 @@ export const accessItems = [
 /** Hero image beside the hero copy. Set to null to show the placeholder slot. */
 export const heroImage: string | null = "/images/hero.jpg";
 
+/**
+ * AI haircut preview — before is the real photo, after is the AI-edited
+ * version with the new cut. Null shows labeled placeholder slots.
+ */
+export const aiPreview: { before: string | null; after: string | null } = {
+  before: null,
+  after: null,
+};
+
 /** Tour video URL — set it and the "Watch the video" button opens it. */
 export const videoUrl: string = "";

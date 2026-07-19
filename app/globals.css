@@ -157,6 +157,34 @@ a:focus-visible {
   }
 }
 
+/* AI scan screen: sweeping red scan line */
+.scan-line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e11414 30%, #e11414 70%, transparent);
+  box-shadow: 0 0 12px rgba(225, 20, 20, 0.7);
+  animation: scanSweep 3.2s ease-in-out infinite;
+}
+
+@keyframes scanSweep {
+  0%,
+  100% {
+    top: 12%;
+  }
+  50% {
+    top: 84%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-line {
+    animation: none;
+    top: 45%;
+  }
+}
+
 /* tour map stops: pins turn red once visited, ring pulses once on arrival */
 .stop-pin {
   fill: #4a4a4a;
